@@ -6,5 +6,5 @@ Developers:
 David Rouleau
 Saad Hindash
 Derek Dunlap Jr
-Jenelle Shines
+Janelle Shines
 Stephon Sanders
