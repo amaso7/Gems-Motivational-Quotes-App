@@ -2,12 +2,14 @@ const express=require('express')
 const app=express()
 const mustacheExpress=require('mustache-express')
 const session=require('express-session')
-const bcrypt=require('bcryptjs')
+global.bcrypt=require('bcryptjs')
 
 const PORT=3000
 const usersRouter=require('./routes/users')
 
 app.use(express.urlencoded())
+
+app.use(express.static('styles'))
 
 app.engine('mustache',mustacheExpress())
 app.set('views','./views')
@@ -23,7 +25,11 @@ app.use('/users',usersRouter)
 
 //path to render the user page.
 app.get('/',(req,res)=>{
-    console.log('Hello World')
+    res.render('login')
+})
+
+app.get('/s',(req,res)=>{
+    res.json({message:"Sign in"})
 })
 
 app.listen(PORT,()=>{

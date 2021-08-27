@@ -2,8 +2,10 @@
 const express=require('express')
 const router=express.Router()
 
+router.use(express.static('styles'))
+
 //feature to allow potential users to create a new account
-router.post('/create-account',(req,res)=>{
+router.post('/register',(req,res)=>{
     const username=req.body.username
     const password=req.body.password
 
@@ -14,11 +16,16 @@ router.post('/create-account',(req,res)=>{
                 if(!error){
                     //code to push to username & password to database
                     console.log('username & password successfully saved to db!')
-                    // db.none('')
-                    // .then(()=>{
-                    //     console.log('New usersuccessfully created!')
-                    //     res.redirect('/')
-                    // })
+                    const user=models.User.build({
+                        username:username,
+                        password:hash
+                    })
+
+                    user.save()
+                    .then(savedUser=>{
+                        console.log('New account created!')
+                        //res.redirect('/login')
+                    })
                 }else{
                     console.log('Error!')
                     //res.send('Error!')
@@ -33,8 +40,8 @@ router.post('/create-account',(req,res)=>{
 
 //feature to allow users to login into their existing accounts
 router.post('/login',(req,res)=>{
-    const username=req.body.username
-    const password=req.body.password
+    const username=req.body.Username
+    const password=req.body.Password
 
     console.log(username,password)
 
@@ -52,6 +59,35 @@ router.post('/login',(req,res)=>{
             //res.render('index',{invalidUserMessage:'Invalid username or password!'})
         }
         
+    })
+})
+
+router.get('/favorites',(req,res)=>{
+    const user_id=req.body.user_id
+    models.Quotes.findAll({
+        where:{
+            id:user_id,
+            is_favorite:true
+        }
+    })
+    .then(favoriteQuotes=>{
+        console.log(favoriteQuotes)
+    })
+})
+
+router.get('/signup',(req,res)=>{
+    res.render('signup')
+})
+
+router.get('/s',(req,res)=>{
+    res.json({message:"Sign in"})
+})
+
+router.post('/logout',(req,res)=>{
+    req.session.destroy(error=>{
+        console.log('Successfully logged out!')
+        //res.clearCookie('connect.sid')
+        //res.redirect('/account/login')
     })
 })
 
