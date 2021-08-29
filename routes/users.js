@@ -1,6 +1,9 @@
 
+const bcrypt = require('bcryptjs/dist/bcrypt')
 const express=require('express')
+const { ReadyForQueryMessage } = require('pg-protocol/dist/messages')
 const router=express.Router()
+const authenticate=require('../authentication/authenticate')
 
 router.use(express.static('styles'))
 
@@ -20,49 +23,64 @@ router.post('/register',(req,res)=>{
                         username:username,
                         password:hash
                     })
-
                     user.save()
                     .then(savedUser=>{
                         console.log('New account created!')
-                        //res.redirect('/login')
+                        if(req.session){
+                            req.session.username=savedUser.username
+                        }
+                        res.render('login',{message:'You have successfully created a new account!'})
                     })
                 }else{
-                    console.log('Error!')
-                    //res.send('Error!')
+                    res.render('login',{message:'Failed to create new account! Try again later.'})
                 }
             })
         }else{
-            console.log('Error!')
-            //res.send('Error!')
+            res.render('login',{message:'Failed to create new account! Try again later.'})
         }
     })
 })
 
 //feature to allow users to login into their existing accounts
 router.post('/login',(req,res)=>{
-    const username=req.body.Username
-    const password=req.body.Password
+    const username=req.body.username
+    const password=req.body.password
 
-    console.log(username,password)
-
-    bcrypt.compare(password,user.password,function(error,result){
-        if(result){
-            if(req.session){
-                req.session.user_id=user.user_id
-                req.session.username=user.username
-            }
-            console.log("User successfully logged in! On user homepage")
-            //res.redirect('/user/homepage')
-        }else{
-            //render the login/create account page with error message
-            console.log("Invalid username or password! Reload login page")
-            //res.render('index',{invalidUserMessage:'Invalid username or password!'})
+    models.User.findOne({
+        where:{
+            username:username
         }
-        
+    })
+    .then(user=>{
+        bcrypt.compare(password,user.password,function(error,result){
+            if(result){
+                if(req.session){
+                    req.session.user_id=user.user_id
+                    req.session.username=user.username
+                }
+                console.log("User successfully logged in! On user homepage")
+                res.redirect('/users/home')
+            }else{
+                //render the login/create account page with error message
+                console.log("Invalid username or password! Reload login page")
+                res.render('login',{message:'Invalid username or password!'})
+            }
+        })
     })
 })
 
-router.get('/favorites',(req,res)=>{
+router.get('/home',authenticate,(req,res)=>{
+    if(req.session){
+        if(req.session.username){
+             res.render('home')
+        }
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
+router.get('/favorites',authenticate,(req,res)=>{
     const user_id=req.body.user_id
     models.Quotes.findAll({
         where:{
@@ -79,15 +97,10 @@ router.get('/signup',(req,res)=>{
     res.render('signup')
 })
 
-router.get('/s',(req,res)=>{
-    res.json({message:"Sign in"})
-})
-
-router.post('/logout',(req,res)=>{
-    req.session.destroy(error=>{
-        console.log('Successfully logged out!')
-        //res.clearCookie('connect.sid')
-        //res.redirect('/account/login')
+router.get('/logout',authenticate,(req,res)=>{
+    req.session.destroy(function(error){
+        res.clearCookie('connect.sid')
+        res.redirect('/')
     })
 })
 
