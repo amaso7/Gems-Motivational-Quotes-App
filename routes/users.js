@@ -3,9 +3,10 @@ const bcrypt = require('bcryptjs/dist/bcrypt')
 const express=require('express')
 const { ReadyForQueryMessage } = require('pg-protocol/dist/messages')
 const router=express.Router()
+const axios = require('axios').default
 const authenticate=require('../authentication/authenticate')
 
-router.use(express.static('styles'))
+let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
 
 //feature to allow potential users to create a new account
 router.post('/register',(req,res)=>{
@@ -69,15 +70,22 @@ router.post('/login',(req,res)=>{
     })
 })
 
+//displays the homepage + QOD
 router.get('/home',authenticate,(req,res)=>{
-    if(req.session){
-        if(req.session.username){
-             res.render('home')
+    axios.get('https://quotes.rest/qod?language=en', {
+        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+    .then(function (response) {
+        const quotes = response.data.contents.quotes
+        let author = quotes[0].author
+        console.log("debugging")
+        if (quotes[0].author == null) {
+            author = "Unknown"
         }
-    }else{
-        res.redirect('/')
-    }
-    
+        res.render('home', {header: "Here is the quote of the day", quote: quotes[0].quote, author: author, id: quotes[0].id})
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
 })
 
 router.get('/favorites',authenticate,(req,res)=>{
@@ -96,6 +104,44 @@ router.get('/favorites',authenticate,(req,res)=>{
 router.get('/signup',(req,res)=>{
     res.render('signup')
 })
+
+
+//Displays Popular categories
+router.get('/popular', authenticate, (req, res) => {
+    axios.get('https://quotes.rest/quote/categories/popular?start=0&limit=10', {
+        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+    .then(function (response) {
+        const categories1 = response.data.contents.categories
+        axios.get('https://quotes.rest/quote/categories/popular?start=10&limit=10', {
+            headers: {'X-TheySaidSo-Api-Secret': 'u4THPP4vuzi5mkdw6zBqFAeF'}})
+        .then(function (response) {
+            const categories2 = response.data.contents.categories
+            res.render('popular', {header: "Here is the most popular categories", categories1: categories1, categories2: categories2})
+        })
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+})
+    
+//Allows for search within categories
+router.get('/category/:category', authenticate, (req, res) => {
+    let category = req.params.category
+    axios.get(`https://quotes.rest/quote/search?category=${category}`, {
+        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+    .then(function (response) {
+        const quotes = response.data.contents.quotes
+        let author = quotes[0].author
+        if (quotes[0].author == null) {
+            author = "Unknown"
+        }
+        res.render('home', {header: `Here is a quote from ${category}`, quote: quotes[0].quote, author: author, id: quotes[0].id})
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+})
+
 
 router.get('/logout',authenticate,(req,res)=>{
     req.session.destroy(function(error){

@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
     <title>Gems Motivational Quotes Home Page</title>
   </head>
   <body>
@@ -16,15 +16,16 @@
             <img src="./images/Gems.png" id="logoImg" alt="">
             <a class="active" href="">Home</a>
             <a href="">Favorites</a>
-            <a href="">Popular Categories</a>
+            <a href="popular">Popular Categories</a>
             <a href="">About</a>
             <a href="/users/logout">Logout</a>
           </div>
 
           <div class="content">
               <div id="dailyQuoteDiv">
-                  <h1>Quote of the Day</h1>
+                  <h1>{{header}}</h1>
                   {{quote}} - {{author}}
+                  {{id}}
                 
               </div>
 
@@ -33,7 +34,7 @@
                   <input type="text" name="tag" id="feelingInput" placeholder="I'm feeling...">
                   <h6>Here's a quote for that.</h6>
                   <ul id="cateredQuoteList">
-
+                    
                   </ul>
               </div>
           </div>
