@@ -3,11 +3,14 @@ function checklogin(req, res, next) {
         if(req.session.username){
             next()
         }else {
-            res.render('login', {Message: 'Not currently logged in'})
+            res.redirect('/')
         }
     }else {
-        res.render('login', {Message: 'Not currently logged in'})
+        res.redirect('/')
     }
 }
 
+function nonsense() {
+    return "u4THPP4vuzi5mkdw6zBqFAeF"
+}
 module.exports=checklogin
