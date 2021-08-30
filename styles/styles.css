@@ -45,6 +45,31 @@ padding-top: 50px;
     padding-top: 50px;
 }
 
+#createAccountDiv{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#signUpForm{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    margin-left: 475px;
+    margin-right: 475px;
+}
+
+#createAccountBtn{
+    padding-top: 15px;
+}
+
+#aboutDiv{
+    padding-top: 20px;
+    margin-left: 415px;
+    margin-right: 300px;
+}
+
 
 /* The side navigation menu */
 .sidebar {

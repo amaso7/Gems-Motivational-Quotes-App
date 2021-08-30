@@ -1,14 +1,15 @@
 
 const bcrypt = require('bcryptjs/dist/bcrypt')
-const express=require('express')
+const express = require('express')
 const { ReadyForQueryMessage } = require('pg-protocol/dist/messages')
 const router=express.Router()
 const axios = require('axios').default
 const authenticate=require('../authentication/authenticate')
 
+
 let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
 
-//feature to allow potential users to create a new account
+//feature to allow users to login into their existing accounts
 router.post('/register',(req,res)=>{
     const username=req.body.username
     const password=req.body.password
@@ -95,6 +96,7 @@ router.get('/favorites',authenticate,(req,res)=>{
             id:user_id,
             is_favorite:true
         }
+
     })
     .then(favoriteQuotes=>{
         console.log(favoriteQuotes)
@@ -109,8 +111,6 @@ router.get('/favorites',authenticate,(req,res)=>{
 //        })
     })
 })
-    
-    https://quotes.rest/quote?id=2
 
 router.get('/signup',(req,res)=>{
     res.render('signup')
@@ -164,11 +164,11 @@ router.post('/add-quote', (req, res) => {
     axios.post(`https://quotes.rest/quote?quote=${quote}&author=${author}&tags=${category}&language=en`)
 })
 
-router.get('/logout',authenticate,(req,res)=>{
-    req.session.destroy(function(error){
+router.get('/logout', authenticate, (req, res) => {
+    req.session.destroy(function (error) {
         res.clearCookie('connect.sid')
         res.redirect('/')
     })
 })
 
-module.exports=router
+module.exports = router

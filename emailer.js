@@ -4,7 +4,7 @@ let nodemailer = require('nodemailer')
 let mailOptions = {
   from: '<FROM_EMAIL_ADDRESS>',
   to: '<TO_EMAIL_ADDRESS>',
-  subject: 'Email from Node-App: A Test Message!',
+  subject: 'Here is your Quote of the Day!',
   text: 'Some content to send'
 }
 
