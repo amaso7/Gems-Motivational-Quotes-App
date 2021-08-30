@@ -55,7 +55,7 @@ router.post('/login',(req,res)=>{
         bcrypt.compare(password,user.password,function(error,result){
             if(result){
                 if(req.session){
-                    req.session.user_id=user.user_id
+                    req.session.user_id=user.id
                     req.session.username=user.username
                 }
                 console.log("User successfully logged in! On user homepage")
@@ -72,24 +72,52 @@ router.post('/login',(req,res)=>{
 router.get('/home',authenticate,(req,res)=>{
     if(req.session){
         if(req.session.username){
-             res.render('home')
+             res.render('home',{userID:req.session.user_id})
         }
     }else{
         res.redirect('/')
     }
-    
 })
 
-router.get('/favorites',authenticate,(req,res)=>{
-    const user_id=req.body.user_id
-    models.Quotes.findAll({
+router.get('/add-favorite',(req,res)=>{
+    // const userID=parseInt(req.body.userID)
+    // const quoteID=req.body.id
+    // const quoteText=req.body.text
+    // const quoteAuthor=req.body.author
+    // const quoteTag=req.body.tag
+
+    const userID=req.body.userID
+    const quoteID=req.body.id
+    const quoteText=req.body.quote
+    const quoteAuthor=req.body.author
+    const quoteTag=req.body.category
+
+    const favorite=models.FavoriteQuote.build({
+        quote:quoteText,
+        author:quoteAuthor,
+        tag:quoteTag,
+        quoteID:quoteID,
+        userID:userID
+    })
+
+    favorite.save()
+    .then(savedQuote=>{
+        console.log("Quote saved!")
+        res.json('home')
+    })
+})
+
+router.get('/favorites',(req,res)=>{
+    const userID=req.body.userID
+
+    models.FavoriteQuote.findAll({
         where:{
-            id:user_id,
-            is_favorite:true
+            userID:userID
         }
     })
-    .then(favoriteQuotes=>{
-        console.log(favoriteQuotes)
+    .then(favoriteQuote=>{
+        console.log(favoriteQuote)
+        res.redirect('/users/home')
     })
 })
 
