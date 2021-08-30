@@ -6,7 +6,7 @@ global.bcrypt=require('bcryptjs')
 global.models=require('./models')
 const checklogin=require('./authentication/authenticate')
 
-const PORT=3000
+const port = process.env.PORT || 80
 const usersRouter=require('./routes/users')
 const quotesRouter = require('./routes/quotes.js')
 
