@@ -6,7 +6,7 @@ global.bcrypt=require('bcryptjs')
 global.models=require('./models')
 const checklogin=require('./authentication/authenticate')
 
-const port = process.env.PORT || 80
+const PORT=3000
 const usersRouter=require('./routes/users')
 const quotesRouter = require('./routes/quotes.js')
 
@@ -14,6 +14,8 @@ const quotesRouter = require('./routes/quotes.js')
 app.use(express.urlencoded())
 
 app.use(express.static('styles'))
+app.use(express.static('images'))
+
 
 app.engine('mustache',mustacheExpress())
 app.set('views','./views')
@@ -41,6 +43,6 @@ app.get('/about', (req,res)=>{
     res.render('about')
 })
 
-app.listen(port,()=>{
+app.listen(PORT,()=>{
     console.log('Server is running...')
 })
