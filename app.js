@@ -41,6 +41,6 @@ app.get('/about', (req,res)=>{
     res.render('about')
 })
 
-app.listen(PORT,()=>{
+app.listen(port,()=>{
     console.log('Server is running...')
 })
