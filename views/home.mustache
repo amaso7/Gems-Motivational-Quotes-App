@@ -31,7 +31,10 @@
 
               <div id="cateredQuoteDiv">
                   <h4>How are you feeling?</h4>
-                  <input type="text" name="tag" id="feelingInput" placeholder="I'm feeling...">
+                  <form method="get" action="/users/category">
+                    <input type="text" name="category" id="feelingInput" placeholder="I'm feeling...">
+                    <button id="submit">Get a quote</button>
+                  </form>
                   <h6>Here's a quote for that.</h6>
                   <ul id="cateredQuoteList">
                     

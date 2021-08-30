@@ -125,8 +125,8 @@ router.get('/popular', authenticate, (req, res) => {
 })
     
 //Allows for search within categories
-router.get('/category/:category', authenticate, (req, res) => {
-    let category = req.params.category
+router.get('/category', authenticate, (req, res) => {
+    let category = req.query.category
     axios.get(`https://quotes.rest/quote/search?category=${category}`, {
         headers: {'X-TheySaidSo-Api-Secret': nonsense}})
     .then(function (response) {
@@ -141,7 +141,6 @@ router.get('/category/:category', authenticate, (req, res) => {
         console.log(error);
     })
 })
-
 
 router.get('/logout',authenticate,(req,res)=>{
     req.session.destroy(function(error){
