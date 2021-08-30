@@ -33,6 +33,14 @@ app.get('/',(req,res)=>{
     res.render('login')
 })
 
+app.get('/home',(req,res)=>{
+    res.render('home')
+})
+
+app.get('/about', (req,res)=>{
+    res.render('about')
+})
+
 app.listen(PORT,()=>{
     console.log('Server is running...')
 })
