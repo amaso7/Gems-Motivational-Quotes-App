@@ -70,6 +70,21 @@ padding-top: 50px;
     margin-right: 300px;
 }
 
+#popUl{
+    list-style: none;
+}
+
+.popLi a{ 
+    display: block;
+    color:goldenrod !important;
+    text-decoration:none;
+    padding-top: 10px;
+}
+
+.popLi a:hover{
+    background-color: #8a1170;
+    color: white !important;
+}
 
 /* The side navigation menu */
 .sidebar {
