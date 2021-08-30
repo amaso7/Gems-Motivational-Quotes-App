@@ -14,14 +14,29 @@
         <title>Signup - Gems Motivational Quotes</title>
     </head>
     <body>
-        <h1>Create Account</h1>
-            <form id= "sign up"action = "/users/register" method = "POST">
+
+        <img id="loginLogoImg" src="./images/Gems.png" alt="">
+        <div id="createAccountDiv">
+            <h1>Create Account</h1>
+            <form id= "signUpForm"action = "/users/register" method = "POST">
                 <label for="username">Username:</label>
                 <input id="username" type ="text" name ="username" required/>
                 <label for="password">Password:</label>
                 <input id="password" type="password" name="password" required/>
-                <input type="submit" value ="Create Account">
+                <label for="email">Email address:</label>
+                <input type="text" id="email" name="email">
+                <div id="createAccountBtn" ><input type="submit" value ="Create Account"></div>
         </form>
+    </div>
+        {{errorMessage}}
+        {{message}}
+
+        <form action="/" method="GET">
+            <h4>Already have an account?</h4>
+            <button id="backToLoginBtn">Log in</button>
+        </form>
+
+        
         <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
