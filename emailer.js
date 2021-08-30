@@ -34,7 +34,7 @@ cron.schedule('0 2 0 * * *', () => {
 
 
 let mailOptions = {
-  from: 'findyourmotivationgems@gmail.com',
+  from: '',
   to: '<TO_EMAIL_ADDRESS>',
   subject: 'Here is your Quote of the Day!',
   text: `${qod}`
@@ -43,8 +43,8 @@ let mailOptions = {
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'findyourmotivationgems@gmail.com',
-    pass: 'project2021'
+    user: '',
+    pass: ''
   }
 })
 
