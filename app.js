@@ -14,6 +14,8 @@ const quotesRouter = require('./routes/quotes.js')
 app.use(express.urlencoded())
 
 app.use(express.static('styles'))
+app.use(express.static('images'))
+
 
 app.engine('mustache',mustacheExpress())
 app.set('views','./views')

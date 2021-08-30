@@ -127,7 +127,7 @@ router.get('/popular', authenticate, (req, res) => {
             headers: {'X-TheySaidSo-Api-Secret': 'u4THPP4vuzi5mkdw6zBqFAeF'}})
         .then(function (response) {
             const categories2 = response.data.contents.categories
-            res.render('popular', {header: "Here is the most popular categories", categories1: categories1, categories2: categories2})
+            res.render('popular', {header: "Popular Categories", categories1: categories1, categories2: categories2})
         })
     })
     .catch(function (error) {
