@@ -61,7 +61,7 @@ router.post('/login',(req,res)=>{
                     req.session.username=user.username
                 }
                 console.log("User successfully logged in! On user homepage")
-                res.redirect('/users/home')
+                res.redirect('home')
             }else{
                 //render the login/create account page with error message
                 console.log("Invalid username or password! Reload login page")
@@ -73,22 +73,38 @@ router.post('/login',(req,res)=>{
 
 //displays the homepage + QOD
 router.get('/home',authenticate,(req,res)=>{
-    axios.get('https://quotes.rest/qod?language=en', {
-        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
-    .then(function (response) {
-        const quotes = response.data.contents.quotes
-        let author = quotes[0].author
-        console.log("debugging")
-        if (quotes[0].author == null) {
-            author = "Unknown"
-        }
-        res.render('home', {header: "Here is the quote of the day", quote: quotes[0].quote, author: author, id: quotes[0].id})
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
+    if (req.query.category){
+        let category = req.query.category
+        axios.get(`https://quotes.rest/quote/search?category=${category}`, {
+            headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+        .then(function (response) {
+            const quotes = response.data.contents.quotes
+            let author = quotes[0].author
+            if (quotes[0].author == null) {
+                author = "Unknown"
+            }
+            res.render('home', {header: `Here is a quote from ${category}`, quote: quotes[0].quote, author: author, id: quotes[0].id})
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }else{
+        axios.get('https://quotes.rest/qod?language=en', {
+            headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+        .then(function (response) {
+            const quotes = response.data.contents.quotes
+            let author = quotes[0].author
+            if (quotes[0].author == null) {
+                author = "Unknown"
+            }
+            res.render('home', {header: "Here is the quote of the day", quote: quotes[0].quote, author: author, id: quotes[0].id})
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
 })
-
+    
 router.get('/favorites',authenticate,(req,res)=>{
     const user_id=req.body.user_id
     models.Quotes.findAll({
@@ -129,24 +145,6 @@ router.get('/popular', authenticate, (req, res) => {
             const categories2 = response.data.contents.categories
             res.render('popular', {header: "Popular Categories", categories1: categories1, categories2: categories2})
         })
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-})
-    
-//Allows for search within categories
-router.get('/category', authenticate, (req, res) => {
-    let category = req.query.category
-    axios.get(`https://quotes.rest/quote/search?category=${category}`, {
-        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
-    .then(function (response) {
-        const quotes = response.data.contents.quotes
-        let author = quotes[0].author
-        if (quotes[0].author == null) {
-            author = "Unknown"
-        }
-        res.render('home', {header: `Here is a quote from ${category}`, quote: quotes[0].quote, author: author, id: quotes[0].id})
     })
     .catch(function (error) {
         console.log(error);
