@@ -98,8 +98,19 @@ router.get('/favorites',authenticate,(req,res)=>{
     })
     .then(favoriteQuotes=>{
         console.log(favoriteQuotes)
+//        axios.get(`https://quotes.rest/quote?id=${id}`, {
+//            headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+//        .then(function (response) {
+//            const quotes = response.data.contents.quotes
+//            res.render('home', {header: "Here are your favorite quotes", quotelist: quotes})
+//        })
+//        .catch(function (error) {
+//            console.log(error);
+//        })
     })
 })
+    
+    https://quotes.rest/quote?id=2
 
 router.get('/signup',(req,res)=>{
     res.render('signup')
@@ -140,6 +151,17 @@ router.get('/category', authenticate, (req, res) => {
     .catch(function (error) {
         console.log(error);
     })
+})
+    
+router.post('/add-quote', (req, res) => {
+    //todo
+    
+    //the format to add a quote to our own private "stash" on the site
+    //uses the following params format, not the usual post-body.
+    let quote = req.body.quote
+    let author = req.body.author
+    let category = req.body.category
+    axios.post(`https://quotes.rest/quote?quote=${quote}&author=${author}&tags=${category}&language=en`)
 })
 
 router.get('/logout',authenticate,(req,res)=>{
