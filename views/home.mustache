@@ -23,11 +23,11 @@
 
           <div class="content">
               <div id="dailyQuoteDiv">
-                  <h1>{{header}}</h1>
-                  {{quote}} - {{author}}
+                  <h1>{{qodheader}}</h1>
+                  {{qodquote}} - {{qodauthor}}                
                   <form method="POST" action="/users/add-favorite">
                     <input type='hidden' value={{userID}} name="userID">
-                    <button value={{id}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
+                    <button value={{{qodid}}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
                   </form>
               </div>
 
@@ -45,21 +45,18 @@
               <div id="cateredQuoteDiv">
                   <form action="" method="GET">
                   <h4>How are you feeling?</h4>
-                  <form method="get" action="/users/category">
+                  <form method="get" action="/home">
                     <input type="text" name="category" id="feelingInput" placeholder="I'm feeling...">
                     <button id="submit">Get a quote</button>
                   </form>
                   <h6>Here's a quote for that.</h6>
                   <ul id="cateredQuoteList">
-                    {{#quotelist}}
-                    <form method='POST' action='/users/unfavorite'>
-                    <li>
-                      <p>{{quote}}</p>
-                      <label>{{author}}</label>
-                      <button value={{quoteID}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
-                    </li>
-                    <form>
-                    {{/quotelist}}
+                    <p>{{header}}</p>
+                    {{quote}} - {{author}}
+                    <form method="POST" action="/users/add-favorite">
+                      <input type='hidden' value={{userID}} name="userID">
+                      <button value={{{id}}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
+                    </form>
                   </ul>
                 </form>
               </div>
