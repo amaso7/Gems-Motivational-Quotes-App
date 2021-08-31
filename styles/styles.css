@@ -1,3 +1,6 @@
+@media screen {
+  
+
 body{
     margin: auto;
     align-items: center;
@@ -70,6 +73,21 @@ padding-top: 50px;
     margin-right: 300px;
 }
 
+#popUl{
+    list-style: none;
+}
+
+.popLi a{ 
+    display: block;
+    color:goldenrod !important;
+    text-decoration:none;
+    padding-top: 10px;
+}
+
+.popLi a:hover{
+    background-color: #8a1170;
+    color: white !important;
+}
 
 /* The side navigation menu */
 .sidebar {
@@ -129,15 +147,17 @@ padding-top: 50px;
       padding: 50px;
 
   }
-  
+}
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
   @media screen and (max-width: 700px) {
     .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
+      display: none;
     }
-    .sidebar a {float: left;}
+    
+    .sidebar a {
+      float: left;
+      display: none;
+    }
     div.content {margin-left: 0;}
   }
   
