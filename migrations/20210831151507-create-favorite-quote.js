@@ -8,15 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      quote: {
-        type: Sequelize.STRING
-      },
-      author: {
-        type: Sequelize.STRING
-      },
-      tag: {
-        type: Sequelize.STRING
-      },
       quoteID: {
         type: Sequelize.STRING
       },

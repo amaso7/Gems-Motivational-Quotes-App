@@ -10,12 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      // define association here
     }
   };
   FavoriteQuote.init({
-    quote: DataTypes.STRING,
-    author: DataTypes.STRING,
-    tag: DataTypes.STRING,
     quoteID: DataTypes.STRING,
     userID: DataTypes.INTEGER
   }, {
