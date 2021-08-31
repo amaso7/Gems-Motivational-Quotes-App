@@ -83,24 +83,30 @@ router.get('/home',authenticate,(req,res)=>{
             if (quotes[0].author == null) {
                 author = "Unknown"
             }
-            res.render('home', {header: `Here is a quote from ${category}`, quote: quotes[0].quote, author: author, id: quotes[0].id})
+            axios.get('https://quotes.rest/qod?language=en', {
+                headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+            .then(function (response) {
+                const qodquotes = response.data.contents.quotes
+                let qodauthor = qodquotes[0].author
+                if (qodquotes[0].author == null) {
+                    author = "Unknown"
+                }
+                res.render('home', {header: `Here is a quote from ${category}`, qodheader: "Here is your daily quote", quote: quotes[0].quote, author: author, id: quotes[0].id, qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id})
+            })
         })
         .catch(function (error) {
             console.log(error);
         })
-    }else{
+    }else {
         axios.get('https://quotes.rest/qod?language=en', {
             headers: {'X-TheySaidSo-Api-Secret': nonsense}})
         .then(function (response) {
-            const quotes = response.data.contents.quotes
-            let author = quotes[0].author
-            if (quotes[0].author == null) {
+            const qodquotes = response.data.contents.quotes
+            let qodauthor = qodquotes[0].author
+            if (qodquotes[0].author == null) {
                 author = "Unknown"
             }
-            res.render('home', {header: "Here is the quote of the day", quote: quotes[0].quote, author: author, id: quotes[0].id})
-        })
-        .catch(function (error) {
-            console.log(error);
+            res.render('home', {qodheader: "Here is your daily quote", qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id})
         })
     }
 })
