@@ -42,10 +42,13 @@
                   <h6>Here's a quote for that.</h6>
                   <ul id="cateredQuoteList">
                     {{#quotelist}}
+                    <form method='POST' action='/users/unfavorite'>
                     <li>
                       <p>{{quote}}</p>
                       <label>{{author}}</label>
+                      <button value={{quoteID}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
                     </li>
+                    <form>
                     {{/quotelist}}
                   </ul>
                 </form>
