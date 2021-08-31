@@ -26,8 +26,8 @@
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="/users/home">Home</a></li>
-            <li><a class="dropdown-item" href="/users/favorites">Favorites</a></li>
-            <li><a class="active" href="/users/popular">Popular Categories</a></li>
+            <li><a class="active" href="/users/favorites" value={{userID}} name="userID">Favorites</a></li>
+            <li><a class="dropdown-item" href="/users/popular">Popular Categories</a></li>
             <li><a class="dropdown-item" href="/about">About</a></li>
             <li><a class="dropdown-item" href="/users/logout">Logout </a></li>
           </ul>
@@ -46,5 +46,6 @@
                 <i class="far fa-gem"></i>
             </ul>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     </body>
 </html>

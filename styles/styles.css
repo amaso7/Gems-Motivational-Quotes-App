@@ -155,8 +155,9 @@ padding-top: 50px;
 
   #favButton{
     color: lightskyblue;
+    background-color: rgba(0 0 0/.5);
     border: none;
-    border-radius: 2%;
+    border-radius: 25%;
   }
 
   h6{
