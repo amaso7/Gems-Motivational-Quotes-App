@@ -16,7 +16,7 @@
 
             <img src="./images/Gems.png" id="logoImg" alt="">
             <a class="active" href="/home">Home</a>
-            <a href="">Favorites</a>
+            <a href="/users/favorites" value={{userID}} name="userID">Favorites</a>
             <a href="popular">Popular Categories</a>
             <a href="">About</a>
             <a href="/users/logout">Logout</a>
@@ -26,7 +26,10 @@
               <div id="dailyQuoteDiv">
                   <h1>{{header}}</h1>
                   {{quote}} - {{author}}
-                  <button value={{id}} id="favButton"><i class="far fa-gem"></i></button>
+                  <form method="POST" action="/users/add-favorite">
+                    <input type='hidden' value={{userID}} name="userID">
+                    <button value={{id}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
+                  </form>
               </div>
 
               <div id="cateredQuoteDiv">
@@ -38,7 +41,12 @@
                   </form>
                   <h6>Here's a quote for that.</h6>
                   <ul id="cateredQuoteList">
-                    
+                    {{#quotelist}}
+                    <li>
+                      <p>{{quote}}</p>
+                      <label>{{author}}</label>
+                    </li>
+                    {{/quotelist}}
                   </ul>
                 </form>
               </div>
