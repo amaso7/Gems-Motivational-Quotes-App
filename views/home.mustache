@@ -23,9 +23,9 @@
 
           <div class="content">
               <div id="dailyQuoteDiv">
-                  <h1>{{header}}</h1>
-                  {{quote}} - {{author}}
-                  <input type="hidden" id="quoteId" name="quoteId" value="{{{id}}}">
+                  <h1>{{qodheader}}</h1>
+                  {{qodquote}} - {{qodauthor}}
+                  <input type="hidden" id="qodquoteId" name="qodquoteId" value="{{{qodid}}}">
                 
               </div>
 
@@ -43,13 +43,15 @@
               <div id="cateredQuoteDiv">
                   <form action="" method="GET">
                   <h4>How are you feeling?</h4>
-                  <form method="get" action="/users/category">
+                  <form method="get" action="/home">
                     <input type="text" name="category" id="feelingInput" placeholder="I'm feeling...">
                     <button id="submit">Get a quote</button>
                   </form>
                   <h6>Here's a quote for that.</h6>
                   <ul id="cateredQuoteList">
-                    
+                    <p>{{header}}</p>
+                    {{quote}} - {{author}}
+                    <input type="hidden" id="quoteId" name="quoteId" value="{{{id}}}">
                   </ul>
                 </form>
               </div>
