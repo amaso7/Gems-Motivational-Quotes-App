@@ -48,6 +48,47 @@ padding-top: 50px;
     padding-top: 50px;
 }
 
+#createAccountDiv{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#signUpForm{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    margin-left: 475px;
+    margin-right: 475px;
+}
+
+#createAccountBtn{
+    padding-top: 15px;
+}
+
+#aboutDiv{
+    padding-top: 20px;
+    margin-left: 415px;
+    margin-right: 300px;
+}
+
+#popUl{
+    list-style: none;
+}
+
+.popLi a{ 
+    display: block;
+    color:goldenrod !important;
+    text-decoration:none;
+    padding-top: 10px;
+}
+
+.popLi a:hover{
+    background-color: #8a1170;
+    color: white !important;
+}
+
 /* The side navigation menu */
 .sidebar {
     margin: 0;

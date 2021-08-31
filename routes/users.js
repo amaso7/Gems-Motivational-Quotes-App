@@ -1,13 +1,15 @@
 
 const bcrypt = require('bcryptjs/dist/bcrypt')
-const express=require('express')
+const express = require('express')
 const { ReadyForQueryMessage } = require('pg-protocol/dist/messages')
 const router=express.Router()
+const axios = require('axios').default
 const authenticate=require('../authentication/authenticate')
 
-router.use(express.static('styles'))
 
-//feature to allow potential users to create a new account
+let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
+
+//feature to allow users to login into their existing accounts
 router.post('/register',(req,res)=>{
     const username=req.body.username
     const password=req.body.password
@@ -69,15 +71,22 @@ router.post('/login',(req,res)=>{
     })
 })
 
+//displays the homepage + QOD
 router.get('/home',authenticate,(req,res)=>{
-    if(req.session){
-        if(req.session.username){
-             res.render('home')
+    axios.get('https://quotes.rest/qod?language=en', {
+        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+    .then(function (response) {
+        const quotes = response.data.contents.quotes
+        let author = quotes[0].author
+        console.log("debugging")
+        if (quotes[0].author == null) {
+            author = "Unknown"
         }
-    }else{
-        res.redirect('/')
-    }
-    
+        res.render('home', {header: "Here is the quote of the day", quote: quotes[0].quote, author: author, id: quotes[0].id})
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
 })
 
 router.get('/favorites',authenticate,(req,res)=>{
@@ -87,9 +96,19 @@ router.get('/favorites',authenticate,(req,res)=>{
             id:user_id,
             is_favorite:true
         }
+
     })
     .then(favoriteQuotes=>{
         console.log(favoriteQuotes)
+//        axios.get(`https://quotes.rest/quote?id=${id}`, {
+//            headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+//        .then(function (response) {
+//            const quotes = response.data.contents.quotes
+//            res.render('home', {header: "Here are your favorite quotes", quotelist: quotes})
+//        })
+//        .catch(function (error) {
+//            console.log(error);
+//        })
     })
 })
 
@@ -97,11 +116,59 @@ router.get('/signup',(req,res)=>{
     res.render('signup')
 })
 
-router.get('/logout',authenticate,(req,res)=>{
-    req.session.destroy(function(error){
+
+//Displays Popular categories
+router.get('/popular', authenticate, (req, res) => {
+    axios.get('https://quotes.rest/quote/categories/popular?start=0&limit=10', {
+        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+    .then(function (response) {
+        const categories1 = response.data.contents.categories
+        axios.get('https://quotes.rest/quote/categories/popular?start=10&limit=10', {
+            headers: {'X-TheySaidSo-Api-Secret': 'u4THPP4vuzi5mkdw6zBqFAeF'}})
+        .then(function (response) {
+            const categories2 = response.data.contents.categories
+            res.render('popular', {header: "Popular Categories", categories1: categories1, categories2: categories2})
+        })
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+})
+    
+//Allows for search within categories
+router.get('/category', authenticate, (req, res) => {
+    let category = req.query.category
+    axios.get(`https://quotes.rest/quote/search?category=${category}`, {
+        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+    .then(function (response) {
+        const quotes = response.data.contents.quotes
+        let author = quotes[0].author
+        if (quotes[0].author == null) {
+            author = "Unknown"
+        }
+        res.render('home', {header: `Here is a quote from ${category}`, quote: quotes[0].quote, author: author, id: quotes[0].id})
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+})
+    
+router.post('/add-quote', (req, res) => {
+    //todo
+    
+    //the format to add a quote to our own private "stash" on the site
+    //uses the following params format, not the usual post-body.
+    let quote = req.body.quote
+    let author = req.body.author
+    let category = req.body.category
+    axios.post(`https://quotes.rest/quote?quote=${quote}&author=${author}&tags=${category}&language=en`)
+})
+
+router.get('/logout', authenticate, (req, res) => {
+    req.session.destroy(function (error) {
         res.clearCookie('connect.sid')
         res.redirect('/')
     })
 })
 
-module.exports=router
+module.exports = router
