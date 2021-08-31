@@ -57,7 +57,7 @@ router.post('/login',(req,res)=>{
         bcrypt.compare(password,user.password,function(error,result){
             if(result){
                 if(req.session){
-                    req.session.user_id=user.user_id
+                    req.session.user_id=user.id
                     req.session.username=user.username
                 }
                 console.log("User successfully logged in! On user homepage")
@@ -111,28 +111,49 @@ router.get('/home',authenticate,(req,res)=>{
     }
 })
 
-router.get('/favorites',authenticate,(req,res)=>{
-    const user_id=req.body.user_id
-    models.Quotes.findAll({
-        where:{
-            id:user_id,
-            is_favorite:true
-        }
-
+router.post('/add-favorite',(req,res)=>{
+    const userID=req.body.userID
+    const quoteID=req.body.quoteID
+    
+    const favoriteQuote=models.FavoriteQuote.build({
+        quoteID:quoteID,
+        userID:userID
     })
-    .then(favoriteQuotes=>{
-        console.log(favoriteQuotes)
-//        axios.get(`https://quotes.rest/quote?id=${id}`, {
-//            headers: {'X-TheySaidSo-Api-Secret': nonsense}})
-//        .then(function (response) {
-//            const quotes = response.data.contents.quotes
-//            res.render('home', {header: "Here are your favorite quotes", quotelist: quotes})
-//        })
-//        .catch(function (error) {
-//            console.log(error);
-//        })
+
+    favoriteQuote.save()
+    .then(savedQuote=>{
+        res.redirect('/users/home')
     })
 })
+
+router.get('/favorites',authenticate,(req,res)=>{
+    const userID=req.session.user_id
+
+    models.FavoriteQuote.findAll({
+        where:{
+            userID:userID
+        }
+    })
+    .then(favoriteQuotes=>{
+        let favoriteQuote=[]
+        for(let i=0;i<favoriteQuotes.length;i++){
+             axios.get(`https://quotes.rest/quote?id=${favoriteQuotes[i].quoteID}`,{
+                    headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+                .then(function (response) {
+                    let quoteObj={quote: response.data.contents.quote,author: response.data.contents.author, quoteID: response.data.contents.id}
+                    favoriteQuote.push(quoteObj)
+
+                    if(i==favoriteQuotes.length-1){
+                        res.render('home', {header: "Here are your favorite quotes", quotelist: favoriteQuote})
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            }
+    })
+})
+
 
 router.get('/signup',(req,res)=>{
     res.render('signup')
@@ -149,7 +170,7 @@ router.get('/popular', authenticate, (req, res) => {
             headers: {'X-TheySaidSo-Api-Secret': 'u4THPP4vuzi5mkdw6zBqFAeF'}})
         .then(function (response) {
             const categories2 = response.data.contents.categories
-            res.render('popular', {header: "Popular Categories", categories1: categories1, categories2: categories2})
+            res.render('popular', {header: "Here is the most popular categories", categories1: categories1, categories2: categories2})
         })
     })
     .catch(function (error) {
