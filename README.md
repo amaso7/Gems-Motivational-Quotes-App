@@ -1,5 +1,5 @@
 
-# DigitalCrafts Week nine back-end Project - Gems App #
+# DigitalCrafts Week Nine Back-End Project - Gems App #
 
 __________________________________________________
 
