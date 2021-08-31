@@ -148,7 +148,7 @@ router.get('/favorites',authenticate,(req,res)=>{
                     favoriteQuote.push(quoteObj)
 
                     if(i==favoriteQuotes.length-1){
-                        res.render('favorites', {favHeader: "Your ", favQuotes: favoriteQuote})
+                        res.render('favorites', {favHeader: "Your favorite ", favQuotes: favoriteQuote})
                     }
                 })
                 .catch(function (error) {

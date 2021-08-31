@@ -33,14 +33,16 @@
         </div> 
         <div id="favQuotesDiv"><h2>{{favHeader}} <i class="far fa-gem"></i>'s: </h2>
             <ul>
+                <i class="far fa-gem"></i>
                 {{#favQuotes}}
                 <form method="POST" action="/users/remove-favorite">
                 <li>
-                    <h6><i class="far fa-gem"></i> {{quote}}</h6>
-                    <h5>{{author}}<button value={{quoteID}} name="quoteID">Remove</button></h5>
+                    <h6>{{quote}}</h6>
+                    <h5>{{author}} <button value={{quoteID}} name="quoteID">Remove</button></h5>
                 </li>
                 </form>
                 {{/favQuotes}}
+                <i class="far fa-gem"></i>
             </ul>
         </div>
     </body>
