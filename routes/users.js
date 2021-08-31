@@ -83,7 +83,7 @@ router.get('/home',authenticate,(req,res)=>{
             if (quotes[0].author == null) {
                 author = "Unknown"
             }
-            res.render('home', {header: `Here is a quote from ${category}`, quote: quotes[0].quote, author: author, id: quotes[0].id})
+            res.render('home', {header: `Here is a quote from ${category}`, quote: quotes[0].quote, author: author, id: quotes[0].id, userID:req.session.user_id})
         })
         .catch(function (error) {
             console.log(error);
@@ -138,7 +138,7 @@ router.get('/favorites',authenticate,(req,res)=>{
                     favoriteQuote.push(quoteObj)
 
                     if(i==favoriteQuotes.length-1){
-                        res.render('home', {header: "Here are your favorite quotes", quotelist: favoriteQuote})
+                        res.render('favorites', {favHeader: "Your favorite", quotelist: favoriteQuote})
                     }
                 })
                 .catch(function (error) {
