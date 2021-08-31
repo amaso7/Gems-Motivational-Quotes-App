@@ -1,3 +1,6 @@
+@media screen {
+  
+
 body{
     margin: auto;
     align-items: center;
@@ -44,7 +47,6 @@ padding-top: 50px;
     align-items: center;
     padding-top: 50px;
 }
-
 
 /* The side navigation menu */
 .sidebar {
@@ -98,15 +100,17 @@ padding-top: 50px;
       padding: 50px;
 
   }
-  
+}
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
   @media screen and (max-width: 700px) {
     .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
+      display: none;
     }
-    .sidebar a {float: left;}
+    
+    .sidebar a {
+      float: left;
+      display: none;
+    }
     div.content {margin-left: 0;}
   }
   
