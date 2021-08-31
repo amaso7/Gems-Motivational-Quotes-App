@@ -91,7 +91,7 @@ router.get('/home',authenticate,(req,res)=>{
                 if (qodquotes[0].author == null) {
                     author = "Unknown"
                 }
-                res.render('home', {header: `Here is a quote from ${category}`, qodheader: "Here is your daily quote", quote: quotes[0].quote, author: author, id: quotes[0].id, qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id})
+                res.render('home', {header: `Here is a quote from ${category}`, qodheader: "Here is your daily quote", quote: quotes[0].quote, author: author, id: quotes[0].id, qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id,userID:req.session.user_id})
             })
         })
         .catch(function (error) {
@@ -106,7 +106,7 @@ router.get('/home',authenticate,(req,res)=>{
             if (qodquotes[0].author == null) {
                 author = "Unknown"
             }
-            res.render('home', {qodheader: "Here is your daily quote", qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id})
+            res.render('home', {qodheader: "Here is your daily quote", qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id,userID:req.session.user_id})
         })
     }
 })
@@ -124,6 +124,10 @@ router.post('/add-favorite',(req,res)=>{
     .then(savedQuote=>{
         res.redirect('/users/home')
     })
+})
+
+router.post('/remove-favorite',(req,res)=>{
+    res.send('Work in progress...')
 })
 
 router.get('/favorites',authenticate,(req,res)=>{
@@ -144,7 +148,7 @@ router.get('/favorites',authenticate,(req,res)=>{
                     favoriteQuote.push(quoteObj)
 
                     if(i==favoriteQuotes.length-1){
-                        res.render('home', {header: "Here are your favorite quotes", quotelist: favoriteQuote})
+                        res.render('favorites', {favHeader: "Your ", favQuotes: favoriteQuote})
                     }
                 })
                 .catch(function (error) {
