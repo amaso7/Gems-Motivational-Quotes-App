@@ -33,10 +33,51 @@ body{
     align-items: center;
 }
 
+#loginBtn{
+  background-color: #8a1170;
+}
+
+#guestLoginBtn{
+  margin-top: 15px;
+  background-color: #8a1170;
+}
+
+#signUpBtn{
+  background-color: #8a1170;
+}
+
+#createBtn{
+  background-color: #8a1170;
+}
+
+#backToLoginBtn{
+  background-color: #8a1170;
+}
+
+#submit{
+  background-color: #8a1170;
+}
+
+#removeBtn{
+  background-color: #8a1170;
+}
+
 #motivationDiv{
 padding-top: 50px;
 }
 
+#cateredQuoteDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+#cateredQuoteList{
+  padding-top: 15px;
+  text-align: center;
+}
 
 #registerDiv{
     display: flex;
@@ -56,8 +97,8 @@ padding-top: 50px;
     display: flex;
     flex-direction: column;
     padding-top: 20px;
-    margin-left: 475px;
-    margin-right: 475px;
+    margin-left: 30%;
+    margin-right: 30%;
 }
 
 #createAccountBtn{

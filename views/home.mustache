@@ -47,16 +47,17 @@
                   <h4>How are you feeling?</h4>
                   <form method="get" action="/home">
                     <input type="text" name="category" id="feelingInput" placeholder="I'm feeling...">
-                    <button id="submit">Get a quote</button>
+                    <button id="submit">Submit</button>
                   </form>
-                  <h6>Here's a quote for that.</h6>
                   <ul id="cateredQuoteList">
                     <p>{{header}}</p>
                     {{quote}} - {{author}}
                     <form method="POST" action="/users/add-favorite">
                       <input type='hidden' value={{userID}} name="userID">
-                      <button value={{{id}}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
-                    </form>
+                      {{#showButton}}
+                        <button value={{{qodid}}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
+                   {{/showButton}}
+                      </form>
                   </ul>
                 </form>
               </div>
