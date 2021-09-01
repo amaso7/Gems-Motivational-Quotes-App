@@ -25,6 +25,12 @@
             <button id="loginBtn">Log In</button>
         </form>
         </div>
+
+        <form method = "POST" action = "/users/login">
+            <input type = "hidden" name = "username" value = "johndoe" /> 
+            <input type = "hidden" name = "password" value = "password" /> 
+            <button id="guestLoginBtn">Login as Guest</button>
+        </form>
         
         <div id="motivationDiv">
             <p>Find your motivation.</p>
@@ -32,7 +38,7 @@
 
         <div id="registerDiv">
             <h4>No account???</h4>
-            <a href="/users/signup"><button>Sign Up!</button></a>
+            <a href="/users/signup"><button id="signUpBtn" >Sign Up!</button></a>
         </div>
     </div>
 
