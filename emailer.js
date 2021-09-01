@@ -1,50 +1,31 @@
-let cron = require('node-cron')
-let nodemailer = require('nodemailer')
-let qod = ""
+const nodemailer = require("nodemailer")
+global.models=require('./models')
 
+// async..await is not allowed in global scope, must use a wrapper
+async function main() {
 
-function getQuote(){
-  axios.get('https://quotes.rest/qod?language=en', {
-        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
-    .then(function (response) {
-        const quotes = response.data.contents.quotes
-        let author = quotes[0].author
-        console.log("debugging")
-        if (quotes[0].author == null) {
-            author = "Unknown"
-        }
-        qod = quotes[0].quote
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: 'findyourmotivationgems@gmail.com',
+      pass: "project2021", 
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: 'findyourmotivationgems@gmail.com', 
+    to: "shabbypenguin@gmail.com", 
+    subject: "Hello ✔", 
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+
 }
 
-cron.schedule('0 2 0 * * *', () => {
-  // Send e-mail
-  getQuote()
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  })
-})
-
-
-let mailOptions = {
-  from: '',
-  to: '<TO_EMAIL_ADDRESS>',
-  subject: 'Here is your Quote of the Day!',
-  text: `${qod}`
-}
-
-let transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: '',
-    pass: ''
-  }
-})
-
+main().catch(console.error);
