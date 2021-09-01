@@ -27,7 +27,7 @@
                   {{qodquote}} - {{qodauthor}}                
                   <form method="POST" action="/users/add-favorite">
                     <input type='hidden' value={{userID}} name="userID">
-                    <button value={{{qodid}}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
+                    <button value={{{qodid}}} name="quoteID" id="favButton"><img src="/favorite-gem.png" id="favgem" alt=""></button>
                   </form>
               </div>
 
@@ -55,7 +55,7 @@
                     {{quote}} - {{author}}
                     <form method="POST" action="/users/add-favorite">
                       <input type='hidden' value={{userID}} name="userID">
-                      <button value={{{id}}} name="quoteID" id="favButton"><i class="far fa-gem"></i></button>
+                      <button value={{{id}}} name="quoteID" id="favButton"><img src="/favorite-gem.png" id="favgem" alt=""></button>
                     </form>
                   </ul>
                 </form>

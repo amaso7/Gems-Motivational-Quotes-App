@@ -173,6 +173,9 @@ padding-top: 50px;
       padding: 50px;
 
   }
+#favgem{
+  height: 25px;
+}
 
   /* On screens that are less than 700px wide, make the sidebar into a dropdown menu*/
   @media screen and (max-width: 700px) {
