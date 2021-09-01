@@ -8,6 +8,9 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 27px;
 }
 
 #everything{
@@ -151,6 +154,19 @@ body{
 }
 #removeButton:active{
   box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+  background-color: #8a1170;
+  height: auto;
+  width: auto;
+}
+
+#favButton img{
+  height: 15px;
+  width: 20px;
+}
+
+#favgem{
+  height: 50px;
+  width: 50px;
 }
 
 #motivationDiv{
@@ -163,6 +179,8 @@ padding-top: 50px;
   align-items: center;
   justify-items: center;
   text-align: center;
+  background-image: linear-gradient(rgba(0, 0, 255, 0.247), #8a11705d);
+  box-shadow: 0 70px 50px 10px #8a11705d, 0 -70px 50px rgba(0, 0, 255, 0.247);
 }
 
 #cateredQuoteList{
@@ -197,9 +215,14 @@ padding-top: 50px;
 }
 
 #aboutDiv{
-    padding-top: 20px;
-    margin-left: 20%;
-    margin-right: 15%;
+    padding-top: 40px;
+    padding-right: 50px;
+    padding-left: 50px;
+    width: 98%;
+    /* margin-left: 20%;
+    margin-right: 15%; */
+    background-image: linear-gradient(rgba(0, 0, 255, 0.247), #8a11705d);
+    box-shadow: 0 70px 50px 10px #8a11705d, 0 -70px 50px rgba(0, 0, 255, 0.247);
 }
 
 #popUl{
@@ -293,11 +316,13 @@ padding-top: 50px;
   }
 
   #favQuotesDiv{
+    padding-top: 40px;
     display:flex;
     flex-direction: column;
     position: relative;
-    left:10%;
-    width: 84%;
+    width: 98%;
+    background-image: linear-gradient(rgba(0, 0, 255, 0.247), #8a11705d);
+    box-shadow: 0 70px 50px 10px #8a11705d, 0 -70px 50px rgba(0, 0, 255, 0.247);
   }
 
   #favQuotesDiv ul{
