@@ -31,14 +31,14 @@ router.post('/register',(req,res)=>{
                         if(req.session){
                             req.session.username=savedUser.username
                         }
-                        res.render('login',{message:'You have successfully created a new account!'})
+                        res.render('newuser',{message:'You have successfully created a new account!'})
                     })
                 }else{
-                    res.render('login',{message:'Failed to create new account! Try again later.'})
+                    res.render('newuser',{message:'Failed to create new account! Try again later.'})
                 }
             })
         }else{
-            res.render('login',{message:'Failed to create new account! Try again later.'})
+            res.render('newuser',{message:'Failed to create new account! Try again later.'})
         }
     })
 })
