@@ -91,7 +91,15 @@ router.get('/home',authenticate,(req,res)=>{
                 if (qodquotes[0].author == null) {
                     author = "Unknown"
                 }
-                res.render('home', {header: `Here is a quote from ${category}`, qodheader: "Here is your daily quote", quote: quotes[0].quote, author: author, id: quotes[0].id, qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id,userID:req.session.user_id, showButton: true})
+                res.render('home', {
+                    header: `Here is a quote from ${category}`, 
+                    qodheader: "Here is your daily quote", 
+                    quote: quotes[0].quote, author: author, 
+                    id: quotes[0].id, 
+                    qodquote: qodquotes[0].quote, 
+                    qodauthor: qodauthor, 
+                    qodid: qodquotes[0].id,userID:req.session.user_id, 
+                    showButton: true})
             })
         })
         .catch(function (error) {
@@ -107,7 +115,12 @@ router.get('/home',authenticate,(req,res)=>{
                 author = "Unknown"
             }
             console.log('hello')
-            res.render('home', {qodheader: "Here is your daily quote", qodquote: qodquotes[0].quote, qodauthor: qodauthor, qodid: qodquotes[0].id,userID:req.session.user_id,  showButton: false})
+            res.render('home', {
+                qodheader: "Here is your daily quote", 
+                qodquote: qodquotes[0].quote, 
+                qodauthor: qodauthor, 
+                qodid: qodquotes[0].id,userID:req.session.user_id,  
+                showButton: false})
         })
     }
 })
@@ -156,7 +169,12 @@ router.get('/favorites',authenticate,(req,res)=>{
              axios.get(`https://quotes.rest/quote?id=${favoriteQuotes[i].quoteID}`,{
                     headers: {'X-TheySaidSo-Api-Secret': nonsense}})
                 .then(function (response) {
-                    let quoteObj={quote: response.data.contents.quote,author: response.data.contents.author, quoteID: response.data.contents.id,userID:req.session.user_id}
+                    let quoteObj={
+                        quote: response.data.contents.quote, 
+                        author: response.data.contents.author, 
+                        quoteID: response.data.contents.id,
+                        userID:req.session.user_id
+                    }
                     favoriteQuote.push(quoteObj)
 
                     if(i==favoriteQuotes.length-1){
