@@ -226,10 +226,7 @@ padding-top: 50px;
   }
 
   #removeButton{
-    background-color: rgba(0 0 0/.5);
-    color: rgb(133, 124, 4);
-    border: none;
-    border-radius: 5%;
+    background-color: #8a1170;
     height: 3vh;
     width: 13%;
   }
