@@ -35,8 +35,8 @@
                 </ul>
             </div>
             <div id="favQuotesDiv"><h2>{{favHeader}} <img src="/favorite-gem.png" id="favgem" alt="">'s: </h2>
-                <ul>
-                    <img src="/favorite-gem.png" id="favgem" alt="">
+                <ul id="favUl">
+
                     {{#favQuotes}}
                     <form method="POST" action="/users/remove-favorite">
                     <li>
