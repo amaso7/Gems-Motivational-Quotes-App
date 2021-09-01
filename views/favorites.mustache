@@ -21,30 +21,32 @@
             <a href="/about">About</a>
             <a href="/users/logout">Logout</a>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Menu</button>
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="/users/home">Home</a></li>
-            <li><a class="active" href="/users/favorites" value={{userID}} name="userID">Favorites</a></li>
-            <li><a class="dropdown-item" href="/users/popular">Popular Categories</a></li>
-            <li><a class="dropdown-item" href="/about">About</a></li>
-            <li><a class="dropdown-item" href="/users/logout">Logout </a></li>
-          </ul>
-        </div>
-        <div id="favQuotesDiv"><h2>{{favHeader}} <i class="far fa-gem"></i>'s: </h2>
-            <ul>
-                <i class="far fa-gem"></i>
-                {{#favQuotes}}
-                <form method="POST" action="/users/remove-favorite">
-                <li>
-                    <h6>{{quote}}</h6>
-                    <h5>{{author}} <button value={{quoteID}} name="quoteID">Remove</button></h5>
-                </li>
-                </form>
-                {{/favQuotes}}
-                <i class="far fa-gem"></i>
-            </ul>
+        <div class="content">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Menu</button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="/users/home">Home</a></li>
+                    <li><a class="active" href="/users/favorites" value={{userID}} name="userID">Favorites</a></li>
+                    <li><a class="dropdown-item" href="/users/popular">Popular Categories</a></li>
+                    <li><a class="dropdown-item" href="/about">About</a></li>
+                    <li><a class="dropdown-item" href="/users/logout">Logout </a></li>
+                </ul>
+            </div>
+            <div id="favQuotesDiv"><h2>{{favHeader}} <i class="far fa-gem"></i>'s: </h2>
+                <ul>
+                    <i class="far fa-gem"></i>
+                    {{#favQuotes}}
+                    <form method="POST" action="/users/remove-favorite">
+                    <li>
+                        <h6 id="quoteHeader">{{quote}}</h6>
+                        <input type="hidden" value={{userID}} name="userID">
+                        <h6 id="authorHeader">-{{author}} <button id="removeButton" value={{quoteID}} name="quoteID">Remove</i></button></h6>
+                    </li>
+                    </form>
+                    {{/favQuotes}}
+                    <i class="far fa-gem"></i>
+                </ul>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     </body>

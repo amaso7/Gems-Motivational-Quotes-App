@@ -126,8 +126,19 @@ router.post('/add-favorite',(req,res)=>{
     })
 })
 
-router.post('/remove-favorite',(req,res)=>{
-    res.send('Work in progress...')
+router.post('/remove-favorite',authenticate,(req,res)=>{
+    const quoteID=req.body.quoteID
+    const userID=req.body.userID
+
+    const removeFavoriteQuote=models.FavoriteQuote.destroy({
+        where:{
+            quoteID:quoteID,
+            userID:userID
+        }
+    })
+    .then(removedFavorite=>{
+        res.redirect('/users/favorites')
+    })
 })
 
 router.get('/favorites',authenticate,(req,res)=>{
@@ -144,7 +155,7 @@ router.get('/favorites',authenticate,(req,res)=>{
              axios.get(`https://quotes.rest/quote?id=${favoriteQuotes[i].quoteID}`,{
                     headers: {'X-TheySaidSo-Api-Secret': nonsense}})
                 .then(function (response) {
-                    let quoteObj={quote: response.data.contents.quote,author: response.data.contents.author, quoteID: response.data.contents.id}
+                    let quoteObj={quote: response.data.contents.quote,author: response.data.contents.author, quoteID: response.data.contents.id,userID:req.session.user_id}
                     favoriteQuote.push(quoteObj)
 
                     if(i==favoriteQuotes.length-1){

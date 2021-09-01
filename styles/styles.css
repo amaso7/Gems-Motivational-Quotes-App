@@ -160,6 +160,44 @@ padding-top: 50px;
     border-radius: 25%;
   }
 
+  #favQuotesDiv{
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    left:10%;
+    width: 84%;
+  }
+
+  #favQuotesDiv ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    padding:0%;
+  }
+
+  #quoteHeader{
+    padding-bottom: 0%;
+  }
+
+  #authorHeader{
+    padding-top: 0%;
+  }
+
+  #removeButton{
+    background-color: rgba(0 0 0/.5);
+    color: rgb(133, 124, 4);
+    border: none;
+    border-radius: 5%;
+    height: 3vh;
+    width: 13%;
+  }
+
+  #favQuotesDiv form{
+    width: 75%;
+    margin: 1%;
+  }
+
   h6{
       padding: 20px;
   }
