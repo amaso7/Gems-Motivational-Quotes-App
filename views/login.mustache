@@ -5,7 +5,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -19,26 +25,26 @@
         <div id="loginDiv">
             <h1>Log in</h1>
             <label>{{message}}</label>
-            <form id="loginForm" action="/users/login" method="POST">           
-            <input type="text" name="username" id="usernameTextBox" placeholder="Username" required>
-            <input type="password" name="password" id="passwordTextBox" placeholder="Password" required>
-            <button id="loginBtn">Log In</button>
-        </form>
+            <form id="loginForm" action="/users/login" method="POST">
+                <input type="text" name="username" id="usernameTextBox" placeholder="Username" required>
+                <input type="password" name="password" id="passwordTextBox" placeholder="Password" required>
+                <button id="loginBtn">Log In</button>
+            </form>
         </div>
 
-        <form method = "POST" action = "/users/login">
-            <input type = "hidden" name = "username" value = "johndoe" /> 
-            <input type = "hidden" name = "password" value = "password" /> 
+        <form method="POST" action="/users/login">
+            <input type="hidden" name="username" value="johndoe" />
+            <input type="hidden" name="password" value="password" />
             <button id="guestLoginBtn">Login as Guest</button>
         </form>
-        
+
         <div id="motivationDiv">
             <p>Find your motivation.</p>
         </div>
 
         <div id="registerDiv">
             <h4>No account???</h4>
-            <a href="/users/signup"><button id="signUpBtn" >Sign Up!</button></a>
+            <a href="/users/signup"><button id="signUpBtn">Sign Up!</button></a>
         </div>
     </div>
 
