@@ -13,8 +13,9 @@ let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
 router.post('/register',(req,res)=>{
     const username=req.body.username
     const password=req.body.password
+    const rdo=req.body.rdo
 
-    console.log(username,password)
+    console.log(username,password, rdo)
     bcrypt.genSalt(10,function(error,salt){
         if(!error){
             bcrypt.hash(password,salt,function(error,hash){
