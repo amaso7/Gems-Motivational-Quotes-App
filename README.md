@@ -14,7 +14,7 @@ __________________________________________________
 __________________________________________________
 
 ## Website description:
-Our group created a motivational quotes app built with javascript, mustache express, css and node. Create an account to save your favorite motivational quotes and  your username and password will be securely stored in our elphant SQL database using hashes. We used a filter function so you can find quotes using the search bar, or you can select key words off our categories section.  
+Our group created a motivational quotes app built with javascript, mustache express, css and node. Create an account to save your favorite motivational quotes and  your username and password will be securely stored in our elphant SQL database using hashes. We used a filter function so you can find quotes using the search bar, or you can select key words off our categories section. You can even favorite quotes that you want to save. Just click on the gem and you can always view your selected quotes and even, delete them. 
  
 __________________________________________________
 
