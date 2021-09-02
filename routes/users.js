@@ -8,11 +8,26 @@ const authenticate=require('../authentication/authenticate')
 
 
 let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
+function validateEmail(email){
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+        return (email)
+    }
+        return false
+}
+
+function validatePassword(password){
+    if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/.test(password)){
+        return (password)
+    }
+        return false
+}
+
+
 
 //feature to allow users to login into their existing accounts
 router.post('/register',(req,res)=>{
-    const username=req.body.username
-    const password=req.body.password
+    const username=validateEmail(req.body.username)
+    const password=validatePassword(req.body.password)
     const qodYes=req.body.qodYes
     let email = ""
     console.log(req.body.qodYes)
@@ -20,35 +35,52 @@ router.post('/register',(req,res)=>{
         email = req.body.username
     }
 
-    console.log(username,password)
-    bcrypt.genSalt(10,function(error,salt){
-        if(!error){
-            bcrypt.hash(password,salt,function(error,hash){
-                if(!error){
-                    //code to push to username & password to database
-                    console.log('username & password successfully saved to db!')
-                    const user=models.User.build({
-                        username:username,
-                        password:hash,
-                        email: email
-                    })
-                    user.save()
-                    .then(savedUser=>{
-                        console.log('New account created!')
-                        if(req.session){
-                            req.session.username=savedUser.username
-                        }
-                        res.render('newuser',{message:'You have successfully created a new account!'})
-                    })
-                }else{
-                    res.render('newuser',{message:'Failed to create new account! Try again later.'})
-                }
-            })
-        }else{
-            res.render('newuser',{message:'Failed to create new account! Try again later.'})
+    const duplicateUser=models.User.findOne({
+        where:{
+            username:username
         }
     })
-})
+    .then(duplicateUser=>{
+        console.log(duplicateUser.username)
+        if(duplicateUser.username==username)
+        res.render('signup',{errorMessage:"An account already exist with this email."})
+    }).catch(function (error) {
+        console.log(error);
+    })
+    
+    if(username==false || password==false){
+        res.render('signup',{errorMessage:"Please enter a valid email address domain and password (ex. email: johndoe@gmail.com password: 1agdA*$#)."})
+    }else if(duplicateUser==username){
+        res.render('signup',{errorMessage:"An account already exist with this email."})
+    }else{
+        bcrypt.genSalt(10,function(error,salt){
+            if(!error){
+                bcrypt.hash(password,salt,function(error,hash){
+                    if(!error){
+                        //code to push to username & password to database
+                        console.log('username & password successfully saved to db!')
+                        const user=models.User.build({
+                            username:username,
+                            password:hash,
+                            email: email
+                        })
+                        user.save()
+                        .then(savedUser=>{
+                            console.log('New account created!')
+                            if(req.session){
+                                req.session.username=savedUser.username
+                            }
+                            res.render('newuser',{message:'You have successfully created a new account!'})
+                        })
+                    }else{
+                        res.render('newuser',{message:'Failed to create new account! Try again later.'})
+                    }
+                })
+            }else{
+                res.render('newuser',{message:'Failed to create new account! Try again later.'})
+            }
+        })
+    }
 
 //feature to allow users to login into their existing accounts
 router.post('/login',(req,res)=>{
@@ -75,6 +107,8 @@ router.post('/login',(req,res)=>{
                 res.render('login',{message:'Invalid username or password!'})
             }
         })
+    }).catch(function (error) {
+        console.log(error);
     })
 })
 
@@ -171,27 +205,30 @@ router.get('/favorites',authenticate,(req,res)=>{
         }
     })
     .then(favoriteQuotes=>{
-        let favoriteQuote=[]
-        for(let i=0;i<favoriteQuotes.length;i++){
-             axios.get(`https://quotes.rest/quote?id=${favoriteQuotes[i].quoteID}`,{
-                    headers: {'X-TheySaidSo-Api-Secret': nonsense}})
-                .then(function (response) {
-                    let quoteObj={
-                        quote: response.data.contents.quote, 
-                        author: response.data.contents.author, 
-                        quoteID: response.data.contents.id,
-                        userID:req.session.user_id
-                    }
-                    favoriteQuote.push(quoteObj)
+            let favoriteQuote=[]
+            for(let i=0;i<favoriteQuotes.length;i++){
+                axios.get(`https://quotes.rest/quote?id=${favoriteQuotes[i].quoteID}`,{
+                        headers: {'X-TheySaidSo-Api-Secret': nonsense}})
+                    .then(function (response) {
+                        let quoteObj={
+                            quote: response.data.contents.quote, 
+                            author: response.data.contents.author, 
+                            quoteID: response.data.contents.id,
+                            userID:req.session.user_id
+                        }
+                        favoriteQuote.push(quoteObj)
 
-                    if(i==favoriteQuotes.length-1){
-                        res.render('favorites', {favHeader: "Your favorite ", favQuotes: favoriteQuote})
-                    }
-                })
+                        console.log(favoriteQuote)
+                        if(i==favoriteQuotes.length-1){
+                            res.render('favorites', {favHeader: "Your favorite ", favQuotes: favoriteQuote})
+                        }
+                    })
                 .catch(function (error) {
                     console.log(error);
                 })
             }
+    }).catch(function (error) {
+        console.log(error);
     })
 })
 
