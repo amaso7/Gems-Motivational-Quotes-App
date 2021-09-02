@@ -38,7 +38,9 @@ __________________________________________________
 
 Here we show our categories section where you can select a key word to search for a quote.
 
-https://user-images.githubusercontent.com/80641831/131734772-e1009890-5ff3-46fb-abfe-78dca9564a29.mp4
+https://user-images.githubusercontent.com/80641831/131874222-3352426a-63e0-4e0c-a1d4-3588b26e3ce8.mp4
+
+
 
 
 
