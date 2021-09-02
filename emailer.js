@@ -39,12 +39,17 @@ function getinfo() {
     const qodquotes = response.data.contents.quotes
     qodauthor = qodquotes[0].author
     qod = qodquotes[0].quote
-    //get users email list
-    
+    models.User.findAll({
+      where:{
+        email:{[Op.ne]: null}
+      }
+    })
+    .then(useremails=>{
+    console.log(useremails.email)
     //run a for loop that makes each user get an email with the QOD
       main(useremail, qod, qodauthor).catch(console.error)
     
-    
+    })
     
     
   })
