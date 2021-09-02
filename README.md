@@ -1,4 +1,3 @@
-
 # DigitalCrafts Week Nine Back-End Project - Gems App #
 
 __________________________________________________
@@ -10,10 +9,7 @@ __________________________________________________
 **Website URL:**
 
 
-[https://immense-chamber-30394.herokuapp.com/users/home](http://localhost/users/home)
-
-
-
+[https://immense-chamber-30394.herokuapp.com/users/home](https://immense-chamber-30394.herokuapp.com/users/home)
 
 
 __________________________________________________
@@ -42,8 +38,8 @@ __________________________________________________
 ## Live screen shots: ##
 
 Here we show our categories section where you can select a key word to search for a quote.
-
 https://user-images.githubusercontent.com/80641831/131869807-7e376752-d15b-4e39-aa7d-7cadb0bd4aff.mp4
+
 
 
 
@@ -59,7 +55,9 @@ https://user-images.githubusercontent.com/80641831/131735048-a314ab22-6672-4359-
 
 
 
+Mobile Device:
 
+https://user-images.githubusercontent.com/80641831/131735106-410ac457-ab99-454c-9359-878e6fdda019.mp4
 
 Mobile Device:
 
@@ -90,3 +88,4 @@ _________________________________
 *Janelle Shines*
 
 *Stephon Sanders*
+
