@@ -25,12 +25,11 @@ function validatePassword(password){
 //feature to allow users to login into their existing accounts
 router.post('/register',(req,res)=>{
     const username=validateEmail(req.body.username)
-    const password=validatePassword(req.body.password)
-    const qodYes=req.body.qodYes
+    const password=req.body.password
     const rdo=req.body.rdo
     let email = ""
     console.log(req.body.rdo)
-    if (qodYes == "on" ){
+    if (rdo == "yes" ){
         email = req.body.username
     }
 
@@ -42,7 +41,7 @@ router.post('/register',(req,res)=>{
     .then(duplicateUser=>{
         if(username=="false" || password=="false"){
             res.render('signup',{errorMessage:"Please enter a valid email address domain and password (ex. email: johndoe@gmail.com password: 1agdA*$#)."})
-        }else if(duplicateUser.username==username){
+        }else if(duplicateUser != null ){
             res.render('signup',{errorMessage:"An account already exist with this email."})
         }else{
             bcrypt.genSalt(10,function(error,salt){
@@ -254,17 +253,60 @@ router.get('/popular', authenticate, (req, res) => {
     })
 })
     
+router.post('/remove-user', (req, res) => {
+    console.log("need to remove the user from the database")
+    const userID=req.session.user_id
     
-router.post('/add-quote', (req, res) => {
-    //todo
-    
-    //the format to add a quote to our own private "stash" on the site
-    //uses the following params format, not the usual post-body.
-    let quote = req.body.quote
-    let author = req.body.author
-    let category = req.body.category
-    axios.post(`https://quotes.rest/quote?quote=${quote}&author=${author}&tags=${category}&language=en`)
+    models.FavoriteQuote.findAll({
+        where:{
+            userID:userID
+        }
+    })
+    .then(favoriteQuotes=>{
+        for(let i=0;i<favoriteQuotes.length;i++){
+            const removeFavoriteQuote=models.FavoriteQuote.destroy({
+                where:{
+                    quoteID:favoriteQuotes[i].quoteID,
+                    userID:userID
+                }
+            })
+            .then(removedFavorite=>{
+                console.log(`removed ${favoriteQuotes[i].quoteID}`)
+            })
+        }
+        console.log("we removed all of their favorites first")
+        const removeuser=models.User.destroy({
+            where:{
+                id:userID
+            }
+        })
+        .then(removeduser=>{
+            console.log("then we can remove the user")
+            res.redirect('/users/logout')
+        })
+    })
 })
+
+router.post('/remove-email',(req,res)=>{
+    console.log("need to remove the email from the database")
+    const userID=req.session.user_id
+    models.User.findOne({
+        where:{
+            id:userID
+        }
+    })
+    .then(user=>{
+        user.update({
+            email: null
+        })
+        .then(update=>{
+            res.render('home', {
+                header: "You have successfully unsubscribed"
+            })
+        })
+    })
+})
+
 
 router.get('/logout', authenticate, (req, res) => {
     req.session.destroy(function (error) {
