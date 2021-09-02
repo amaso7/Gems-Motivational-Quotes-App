@@ -9,7 +9,7 @@ __________________________________________________
 **Website URL:**
 
 
-[https://immense-chamber-30394.herokuapp.com/users/home](http://localhost/users/home)
+[https://immense-chamber-30394.herokuapp.com/users/home](https://immense-chamber-30394.herokuapp.com/users/home)
 
 __________________________________________________
 
@@ -36,12 +36,16 @@ __________________________________________________
 __________________________________________________
 ## Live screen shots: ##
 
-Here we show our categories section where you can select a key word to search for a quote.
+Here we show our categories section where you can select a key word to search for a quote as well as favoriting the quotes that stand out the most to you.
 
 https://user-images.githubusercontent.com/80641831/131874222-3352426a-63e0-4e0c-a1d4-3588b26e3ce8.mp4
 
 
 
+
+here we show the search bar funtionality:
+
+https://user-images.githubusercontent.com/80641831/131875893-25a69883-73bc-41d6-895e-df704373523a.mp4
 
 
 
@@ -52,8 +56,8 @@ https://user-images.githubusercontent.com/80641831/131874222-3352426a-63e0-4e0c-
 
 Tablet Display:
 
-https://user-images.githubusercontent.com/80641831/131735048-a314ab22-6672-4359-8083-d82bbc3fb1ab.mp4
 
+https://user-images.githubusercontent.com/80641831/131875409-19abd465-fb9c-4d2f-9eaa-0b7de67de819.mp4
 
 
 
@@ -62,14 +66,19 @@ https://user-images.githubusercontent.com/80641831/131735048-a314ab22-6672-4359-
 
 Mobile Device:
 
-https://user-images.githubusercontent.com/80641831/131735106-410ac457-ab99-454c-9359-878e6fdda019.mp4
+
+https://user-images.githubusercontent.com/80641831/131874816-a3917e70-0faf-46d9-ac57-4bbce5059e16.mp4
+
+
+
+
 
 
 Desktop Display:
 
 
+https://user-images.githubusercontent.com/80641831/131874565-2965571d-bb9e-4901-ba92-b02c29277ed0.mp4
 
-https://user-images.githubusercontent.com/80641831/131735010-f0d55ce2-3a33-478b-9d52-6ea7f4c3d625.mp4
 
 
 
