@@ -2,47 +2,70 @@
 <html lang="en">
 
 <html>
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-        <link rel="stylesheet" href="/styles.css">
-        <title>Signup - Gems Motivational Quotes</title>
-    </head>
-    <body>
 
-        <img id="loginLogoImg" src="/Gems.png" alt="">
-        <div id="createAccountDiv">
-            <h1>Create Account</h1>
-            <form id= "signUpForm"action = "/users/register" method = "POST">
-                <label for="username">Email address:</label>
-                <input id="username" type ="text" name ="username" required/>
-                <label for="password">Password:</label>
-                <input id="password" type="password" name="password" required/>
-                <div id="createAccountBtn" ><input type="submit" id="createBtn" value ="Create Account"></div>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Signup - Gems Motivational Quotes</title>
+</head>
+
+<body>
+
+    <img id="loginLogoImg" src="/Gems.png" alt="">
+    <div id="createAccountDiv">
+        <h1>Create Account</h1>
+        <form id="signUpForm" action="/users/register" method="POST">
+            <label for="username">Email address:</label>
+            <input id="username" type="text" name="username" required />
+
+            <div id="emailOptInDiv">
+                <h4 id="question">Would you like to recieve the Quote of the Day via email?</h4>
+                <div class="toggle-radio">
+                    <input type="radio" name="qodYes" id="yes" checked>
+                    <input type="radio" name="qodNo" id="no">
+                    <div class="switch">
+                        <label for="yes">Yes</label>
+                        <label for="no">No</label>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <label for="password">Password:</label>
+            <input id="password" type="password" name="password" required />
+            <div id="createAccountBtn"><input type="submit" id="createBtn" value="Create Account"></div>
         </form>
-    </div>
-        {{errorMessage}}
-        {{message}}
-
+        
         <form action="/" method="GET">
             <h4>Already have an account?</h4>
             <button id="backToLoginBtn">Log in</button>
         </form>
 
-        
-        <!-- Option 1: Bootstrap Bundle with Popper -->
+    </div>
+    {{errorMessage}}
+    {{message}}
+
+   
+
+
+
+   
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-    </body>
+</body>
+
 </html>
-
-
