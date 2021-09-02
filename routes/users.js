@@ -13,6 +13,12 @@ let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
 router.post('/register',(req,res)=>{
     const username=req.body.username
     const password=req.body.password
+    const qodYes=req.body.qodYes
+    let email = ""
+    console.log(req.body.qodYes)
+    if (qodYes == "on" ){
+        email = req.body.username
+    }
 
     console.log(username,password)
     bcrypt.genSalt(10,function(error,salt){
@@ -23,7 +29,8 @@ router.post('/register',(req,res)=>{
                     console.log('username & password successfully saved to db!')
                     const user=models.User.build({
                         username:username,
-                        password:hash
+                        password:hash,
+                        email: email
                     })
                     user.save()
                     .then(savedUser=>{
