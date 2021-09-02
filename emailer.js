@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer")
+const axios = require('axios').default
 global.models=require('./models')
 let qodauthor = ""
 let qod = ""
