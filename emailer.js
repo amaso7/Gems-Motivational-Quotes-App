@@ -4,6 +4,7 @@ let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
 global.models=require('./models')
 let qodauthor = ""
 let qod = ""
+let useremail =""
 // async..await is not allowed in global scope, must use a wrapper
 async function main(useremail, qod, qodauthor) { 
   
