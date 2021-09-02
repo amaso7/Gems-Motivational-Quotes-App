@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer")
 const axios = require('axios').default
 let nonsense = "u4THPP4vuzi5mkdw6zBqFAeF"
+const Op = require('sequelize').Op;
 global.models=require('./models')
 let qodauthor = ""
 let qod = ""
@@ -22,8 +23,8 @@ async function main(useremail, qod, qodauthor) {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: 'findyourmotivationgems@gmail.com', 
-    to: "shabbypenguin@gmail.com", 
-    subject: `Hello ${useremail}, here is todays quote`, 
+    to: useremail, 
+    subject: `Hello ${useremail}, here is today's quote`, 
     text: `${qod} - ${qodauthor}`, // plain text body
     html: `<b>${qod} - ${qodauthor}</b>`, // html body
   })
@@ -45,13 +46,12 @@ function getinfo() {
       }
     })
     .then(useremails=>{
-    console.log(useremails.email)
+      for(let i=0;i<useremails.length;i++){
+      useremail= useremails[i].dataValues.email
     //run a for loop that makes each user get an email with the QOD
       main(useremail, qod, qodauthor).catch(console.error)
-    
+      }
     })
-    
-    
   })
 }
 
