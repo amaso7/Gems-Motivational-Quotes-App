@@ -14,7 +14,7 @@ __________________________________________________
 __________________________________________________
 
 ## Website description:
-Our group created a motivational quotes app built with javascript, mustache express, css and node. Create an account to save your favorite motivational quotes and  your username and password will be securely stored in our elphant SQL database using hashes. We used a filter function so you can find quotes using the search bar, or you can select key words off our categories section. You can even favorite quotes that you want to save. Just click on the gem and you can always view your selected quotes and even, delete them. 
+Our group created a motivational quotes app built with javascript, mustache express, css and node. Create an account to save your favorite motivational quotes and  your username and password will be securely stored in our elphant SQL database using hashes. We used a filter function so you can find quotes using the search bar, or you can select key words off our categories section. You can even favorite quotes that you want to save. Just click on the gem and you can always view your selected quotes and even, delete them.  Also sign up to recieve Daily quote of the day emails which can be sent daily.
  
 __________________________________________________
 
@@ -36,14 +36,14 @@ __________________________________________________
 __________________________________________________
 ## Live screen shots: ##
 
-Here we show our categories section where you can select a key word to search for a quote as well as favoriting the quotes that stand out the most to you.
+Here we show our categories section where you can select a key word to search for a quote as well as favoriting the quotes that stand out the most to you:
 
 https://user-images.githubusercontent.com/80641831/131874222-3352426a-63e0-4e0c-a1d4-3588b26e3ce8.mp4
 
 
 
 
-here we show the search bar funtionality:
+Here we show the search bar funtionality:
 
 https://user-images.githubusercontent.com/80641831/131875893-25a69883-73bc-41d6-895e-df704373523a.mp4
 
