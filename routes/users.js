@@ -27,8 +27,9 @@ router.post('/register',(req,res)=>{
     const username=validateEmail(req.body.username)
     const password=validatePassword(req.body.password)
     const qodYes=req.body.qodYes
+    const rdo=req.body.rdo
     let email = ""
-    console.log(req.body.qodYes)
+    console.log(req.body.rdo)
     if (qodYes == "on" ){
         email = req.body.username
     }
