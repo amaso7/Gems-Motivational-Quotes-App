@@ -134,7 +134,9 @@ body{
   box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
   text-align:center;
   position:relative;
-}#submit:active{
+}
+
+#submit:active{
   box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
 }
 
@@ -169,6 +171,52 @@ body{
   width: 50px;
 }
 
+
+
+.switch {
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  background: rgba(52, 11, 236, 0.199);
+  transition: all 0.2s ease;
+  border-radius: 25px;
+}
+
+input[type=radio] {
+  display: none;
+}
+.switch label {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.534);
+  width: 60px;
+  line-height: 50px;
+  transition: all 0.2s ease;
+}
+label[for=yes] {
+  height: 20px;
+}
+
+#no:checked ~ .switch {
+  background: #8a11705d;
+  box-shadow: 0 70px 50px 10px #8a11705d
+}
+#no:checked ~ .switch span {
+  background: #fff;
+  margin-left: -8px;
+}
+#no:checked ~ .switch span:after {
+  background: #fff;
+  height: 20px;
+  margin-top: -8px;
+  margin-left: 8px;
+}
+#yes:checked ~ .switch label[for=yes] {
+  color: #fff;
+}
+#no:checked ~ .switch label[for=no] {
+  color: #fff;
+}
+
 #motivationDiv{
 padding-top: 50px;
 }
@@ -200,6 +248,23 @@ padding-top: 50px;
     flex-direction: column;
     padding-top: 15px;
     padding-bottom: 15px;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+}
+
+#question{
+  background-image: linear-gradient(rgba(0, 0, 255, 0.247), #8a11705d);
+  box-shadow: 0 15px 50px 15px #8a11705d, 0 -15px 10px rgba(0, 0, 255, 0.247);
+  width: 80%;
+  margin-top: 22px;
+}
+
+#emailOptInDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
 }
 
 #signUpForm{
