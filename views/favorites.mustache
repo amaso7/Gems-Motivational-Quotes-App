@@ -49,9 +49,9 @@
                     {{#favQuotes}}
                     <form method="POST" action="/users/remove-favorite">
                     <li>
-                        <h6 id="quoteHeader">"{{quote}}"</h6>
+                        <h3 id="quoteHeader">"{{quote}}"</h3>
                         <input type="hidden" value={{userID}} name="userID">
-                        <h6 id="authorHeader">-{{author}} <button id="removeButton" value={{quoteID}} name="quoteID">Remove</i></button></h6>
+                        <h4 id="authorHeader">-{{author}} <button id="removeButton" value={{quoteID}} name="quoteID">Remove</i></button></h4>
                     </li>
                     </form>
                     {{/favQuotes}}
