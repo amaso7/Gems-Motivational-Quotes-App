@@ -97,5 +97,4 @@ _________________________________
 
 *Janelle Shines*
 
-*Stephon Sanders*
 
